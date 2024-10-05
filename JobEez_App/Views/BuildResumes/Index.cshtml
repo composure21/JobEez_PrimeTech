@@ -1,0 +1,186 @@
+﻿@model IEnumerable<JobEez_App.Models.BuildResume>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        .footer {
+            background-color: #28a745; /* Green background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px; /* Add some space above the footer */
+        }
+
+            .footer a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-size: 1rem;
+                transition: color 0.3s ease;
+            }
+
+                .footer a:hover {
+                    color: #ccc; /* Slightly lighter color on hover */
+                }
+
+        .search-box {
+            display: flex;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .search-button:hover {
+                background-color: #218838;
+            }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .flex-container, .flex-container-2 {
+            display: flex;
+            align-items: flex-start; /* Center items vertically */
+            justify-content: center; /* Space between text and image */
+            padding: 5px;
+        }
+
+        .first-section, .second-section {
+            padding: 50px 20px;
+            width: 100%;
+            background-color: #f8f9fa; /* Light background for separation */
+            margin-bottom: 40px; /* Space between sections */
+        }
+
+        .text-container {
+            flex: 1; /* Allow text to take available space */
+            padding-right: 20px; /* Space between text and image */
+        }
+
+        .image-container, .image-container-2 {
+            flex: 0 0 50%; /* Fixed width for images */
+            display: flex;
+            align-items: flex-end;
+            justify-content: center; /* Center images horizontally */
+        }
+
+        .resized-image, .resized-image-2 {
+            max-width: 100%; /* Ensure the image fits the container */
+            height: auto;
+        }
+
+        .custom-small-text {
+            font-size: 1rem;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color: #218838;
+            }
+
+        .button-secondary {
+            background-color: #6c757d;
+        }
+
+            .button-secondary:hover {
+                background-color: #5a6268;
+            }
+    </style>
+</head>
+<body>
+    <!-- Search Box -->
+    <form action="#" method="GET" class="search-box">
+        <input type="text" class="search-input" placeholder="Search for jobs..." aria-label="Search for jobs" />
+        <button type="submit" class="search-button bg-success">Search</button>
+    </form>
+
+    <section class="bg-light py-5 first-section">
+        <div class="container">
+            <div class="flex-container">
+                <div class="text-container">
+                    <h2 class="display-5 fw-bolder" style="font-size: 75px;"><span class="text-gradient d-inline">Achieve your</span></h2>
+                    <h2 class="display-5 fw-bolder" style="font-size: 75px;"><span class="text-gradient d-inline">career goals</span></h2>
+                    <h2 class="display-5 fw-bolder" style="font-size: 75px;"><span class="text-gradient d-inline">with ease</span></h2>
+                    <p class="custom-small-text">Create your CV. Take your career to the next level.</p>
+                    <p class="custom-small-text">Find great talent. Build your business.</p>
+                    <div class="button-container">
+                        <a asp-action="Create" class="btn bg-success">Create CV</a>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="~/images/ow.png" alt="Your Description" class="resized-image" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5 second-section">
+        <div class="container">
+            <div class="flex-container-2">
+                <div class="text-container">
+                    <h2 class="display-5 fw-bolder" style="font-size: 75px;"><span class="text-gradient d-inline">About Us</span></h2>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">At JobEéz, we make creating a professional CV simple and intuitive.</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">Our platform guides you through a series of interactive questions,</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">designed to extract key details about your skills and achievements.</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">This ensures that your CV is well-organized and highlights the strengths</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">that employers are looking for. Employers can search for and review</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">profiles that match their needs for a minimum payment. Whether you’re</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">aiming to advance your career or looking to hire top talent, JobEéz</span></p>
+                    <p class="custom-small-text" style="font-size: 16px;"><span class="text-gradient d-inline">bridges the gap between opportunity and success.</span></p>
+                </div>
+                <div class="image-container-2">
+                    <img src="~/images/laptop_woman.png" alt="Your Description" class="resized-image-2" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+</body>
+</html>

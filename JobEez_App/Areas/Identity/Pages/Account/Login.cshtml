@@ -1,0 +1,73 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<style>
+
+    body {
+        background-image: url('/images/green_back.jpg'); /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    .btn-green {
+        background-color: #28a745; /* Green background */
+        color: white;
+        border: none;
+    }
+
+        .btn-green:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+    /* Adjusting the size of text inputs */
+    .form-control {
+        width: 50%; /* Change this value to your desired width */
+        margin: 0 auto; /* Centering the input field */
+    }
+
+    /* Optional: To make the account-box smaller */
+    .account-box {
+        max-width: 400px; /* Set a max-width for the whole form */
+        margin: 0 auto; /* Center the form */
+        padding: 20px;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<div class="account-container">
+    <div class="account-box">
+        <h2 class="text-center mb-4">Login</h2>
+        <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                <input type="login-submit" value="Login" class="btn btn-success w-100 p-2" />
+                </div>
+            </form>
+        </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

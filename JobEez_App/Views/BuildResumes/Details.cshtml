@@ -1,0 +1,204 @@
+﻿@model JobEez_App.Models.BuildResume
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="text-center">Resume Info</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <hr />
+                    <h4 class="mt-4">Personal Information</h4>
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.FullName)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.LinkedinUrl)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.LinkedinUrl)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.PhotoUrl)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.PhotoUrl)
+                        </dd>
+
+                        <h4 class="mt-4">Career Objective</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.CareerObjective)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.CareerObjective)
+                        </dd>
+
+                        <h4 class="mt-4">Education</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Degree)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Degree)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Institution)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Institution)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.EdLocation)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.EdLocation)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.GraduationYear)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.GraduationYear)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.RelevantCoursesAchievements)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.RelevantCoursesAchievements)
+                        </dd>
+
+                        <h4 class="mt-4">Work Experience</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.JobTitle)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.JobTitle)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Company)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Company)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.WorkLocation)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.WorkLocation)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.WorkexStartDate)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.WorkexStartDate)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.WorkexEndDate)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.WorkexEndDate)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Responsibilities)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Responsibilities)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <hr />
+                    <h4 class="mt-4">Skills</h4>
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.SkillName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.SkillName)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.SkillType)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.SkillType)
+                        </dd>
+
+                        <h4 class="mt-4">Languages</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Language)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Language)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Proficiency)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Proficiency)
+                        </dd>
+
+                        <h4 class="mt-4">Certification</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.CertificationName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.CertificationName)
+                        </dd>
+
+                        <h4 class="mt-4">Volunteer Experience</h4>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VolunteerRole)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VolunteerRole)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Organization)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Organization)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VolunteerStartDate)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VolunteerStartDate)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VolunteerEndDate)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VolunteerEndDate)
+                        </dd>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.VolunteerResponsibilities)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.VolunteerResponsibilities)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

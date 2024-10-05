@@ -1,0 +1,311 @@
+﻿@model JobEez_App.Models.BuildResume
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .form-control {
+        border: 2px solid #d3d3d3; /* Bootstrap success color */
+    }
+
+        .form-control:focus {
+            border-color: #218838; /* Darker green for focus state */
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); /* Bootstrap focus shadow */
+        }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-success:hover {
+            border-color: #218838; /* Darker green on hover */
+        }
+</style>
+
+<!-- Full-height container to center content -->
+<div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
+    <h1>Build Resume</h1>
+    <hr />
+
+    <div class="col-11 mx-auto pt-0 p-0">
+        <div class="card">
+            <div class="card-header bg-success text-uppercase text-white" style="height: 45px;">
+                <h4>Create Resume</h4>
+            </div>
+            <form ID="ApplicationForm" enctype="multipart/form-data" asp-action="Create">
+                <h4>Personal Information</h4>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="FullName" class="control-label"></label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="control-label"></label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label"></label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="LinkedinUrl" class="control-label"></label>
+                                <input asp-for="LinkedinUrl" class="form-control" />
+                                <span asp-validation-for="LinkedinUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhotoUrl" class="control-label"></label>
+                                <div class="custom-file">
+                                    <!-- The input type is changed to 'file' to allow file selection -->
+                                    <input asp-for="PhotoUrl" type="file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" class="custom-file-input" id="customerFile"
+                                           onchange="handleFilePreview(this)" />
+                                    <label class="custom-file-label" for="customerFile">Choose file...</label>
+                                </div>
+                                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+
+                                <!-- This image tag will display the preview of the selected image -->
+                                <img id="PreviewPhoto" src="#" alt="Image Preview" style="display:none; margin-top:10px; max-width: 100px;" />
+                            </div>
+                        </div>
+
+                        <script>
+                            function handleFilePreview(input) {
+                                var file = input.files[0];
+                                if (file) {
+                                    // Only show preview if the selected file is an image (jpg, jpeg, png)
+                                    if (file.type.startsWith("image/")) {
+                                        var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            document.getElementById('PreviewPhoto').src = e.target.result;
+                                            document.getElementById('PreviewPhoto').style.display = 'block';
+                                        };
+                                        reader.readAsDataURL(file);
+                                    } else {
+                                        // Hide preview if the file is not an image
+                                        document.getElementById('PreviewPhoto').style.display = 'none';
+                                    }
+                                }
+                            }
+                        </script>
+
+
+
+                        <!-- Career Objective -->
+                        <h4 class="mt-4">Career Objective</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CareerObjective" class="control-label"></label>
+                                <input asp-for="CareerObjective" class="form-control" />
+                                <span asp-validation-for="CareerObjective" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Education -->
+                        <h4 class="mt-4">Education</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Institution" class="control-label"></label>
+                                <input asp-for="Institution" class="form-control" />
+                                <span asp-validation-for="Institution" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="EdLocation" class="control-label"></label>
+                                <input asp-for="EdLocation" class="form-control" />
+                                <span asp-validation-for="EdLocation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="GraduationYear" class="control-label"></label>
+                                <input asp-for="GraduationYear" class="form-control" />
+                                <span asp-validation-for="GraduationYear" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Degree" class="control-label"></label>
+                                <input asp-for="Degree" class="form-control" />
+                                <span asp-validation-for="Degree" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RelevantCoursesAchievements" class="control-label"></label>
+                                <input asp-for="RelevantCoursesAchievements" class="form-control" />
+                                <span asp-validation-for="RelevantCoursesAchievements" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Work Experience -->
+                        <h4 class="mt-4">Work Experience</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="JobTitle" class="control-label"></label>
+                                <input asp-for="JobTitle" class="form-control" />
+                                <span asp-validation-for="JobTitle" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Company" class="control-label"></label>
+                                <input asp-for="Company" class="form-control" />
+                                <span asp-validation-for="Company" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="WorkLocation" class="control-label"></label>
+                                <input asp-for="WorkLocation" class="form-control" />
+                                <span asp-validation-for="WorkLocation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="WorkexStartDate" class="control-label"></label>
+                                <input asp-for="WorkexStartDate" class="form-control" />
+                                <span asp-validation-for="WorkexStartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="WorkexEndDate" class="control-label"></label>
+                                <input asp-for="WorkexEndDate" class="form-control" />
+                                <span asp-validation-for="WorkexEndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Responsibilities" class="control-label"></label>
+                                <input asp-for="Responsibilities" class="form-control" />
+                                <span asp-validation-for="Responsibilities" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Skills -->
+                        <h4 class="mt-4">Skills</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="SkillName" class="control-label"></label>
+                                <input asp-for="SkillName" class="form-control" />
+                                <span asp-validation-for="SkillName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="SkillType" class="control-label"></label>
+                                <input asp-for="SkillType" class="form-control" />
+                                <span asp-validation-for="SkillType" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Languages -->
+                        <h4 class="mt-4">Languages</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Language" class="control-label"></label>
+                                <input asp-for="Language" class="form-control" />
+                                <span asp-validation-for="Language" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Proficiency" class="control-label"></label>
+                                <input asp-for="Proficiency" class="form-control" />
+                                <span asp-validation-for="Proficiency" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Volunteer Experience -->
+                        <h4 class="mt-4">Volunteer Experience</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="VolunteerRole" class="control-label"></label>
+                                <input asp-for="VolunteerRole" class="form-control" />
+                                <span asp-validation-for="VolunteerRole" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Organization" class="control-label"></label>
+                                <input asp-for="Organization" class="form-control" />
+                                <span asp-validation-for="Organization" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="VolunteerStartDate" class="control-label"></label>
+                                <input asp-for="VolunteerStartDate" class="form-control" />
+                                <span asp-validation-for="VolunteerStartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="VolunteerEndDate" class="control-label"></label>
+                                <input asp-for="VolunteerEndDate" class="form-control" />
+                                <span asp-validation-for="VolunteerEndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="VolunteerResponsibilities" class="control-label"></label>
+                                <input asp-for="VolunteerResponsibilities" class="form-control" />
+                                <span asp-validation-for="VolunteerResponsibilities" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Certifications -->
+                        <h4 class="mt-4">Certifications</h4>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CertificationName" class="control-label"></label>
+                                <input asp-for="CertificationName" class="form-control" />
+                                <span asp-validation-for="CertificationName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-center align-items-end" style="height: 10vh;">
+                            <button type="submit" class="btn bg-success">Create CV</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

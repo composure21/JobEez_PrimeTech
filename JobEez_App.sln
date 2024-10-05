@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobEez_App", "JobEez_App\JobEez_App.csproj", "{14B49FDA-2DF2-43D5-A81D-CBDAF3F7020E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14B49FDA-2DF2-43D5-A81D-CBDAF3F7020E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B49FDA-2DF2-43D5-A81D-CBDAF3F7020E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B49FDA-2DF2-43D5-A81D-CBDAF3F7020E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B49FDA-2DF2-43D5-A81D-CBDAF3F7020E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9B8D12C-C69E-4911-9324-7DCF728E9F95}
+	EndGlobalSection
+EndGlobal

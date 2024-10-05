@@ -45,10 +45,10 @@ public partial class BuildResume
     public string WorkLocation { get; set; } = null!;
 
     [Display(Name = "Start Date")]
-    public DateOnly WorkexStartDate { get; set; }
+    public DateTime WorkerStartDate { get; set; }
 
     [Display(Name = "End Date")]
-    public DateOnly? WorkexEndDate { get; set; }
+    public DateTime? WorkerEndDate { get; set; }
 
     public string Responsibilities { get; set; } = null!;
 
@@ -71,10 +71,10 @@ public partial class BuildResume
     public string Organization { get; set; } = null!;
 
     [Display(Name = "Volunteer Start Date")]
-    public DateOnly VolunteerStartDate { get; set; }
+    public DateTime VolunteerStartDate { get; set; }
 
     [Display(Name = "Volunteer End Date")]
-    public DateOnly? VolunteerEndDate { get; set; }
+    public DateTime? VolunteerEndDate { get; set; }
 
     [Display(Name = "Volunteer Responsibilities")]
     public string VolunteerResponsibilities { get; set; } = null!;

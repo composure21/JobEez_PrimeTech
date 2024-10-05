@@ -1,8 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using JobEez_App.Areas.Identity.Data
 
-@inject SignInManager<JobEez_AppUser> SignInManager
-@inject UserManager<JobEez_AppUser> UserManager
+@inject SignInManager<AspNetUser> SignInManager
+@inject UserManager<AspNetUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

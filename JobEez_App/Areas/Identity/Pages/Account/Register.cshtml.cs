@@ -12,29 +12,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using JobEez_App.Areas.Identity.Data;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using JobEez_App.Models;
 
 namespace JobEez_App.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<JobEez_AppUser> _signInManager;
-        private readonly UserManager<JobEez_AppUser> _userManager;
-        private readonly IUserStore<JobEez_AppUser> _userStore;
-        private readonly IUserEmailStore<JobEez_AppUser> _emailStore;
+        private readonly SignInManager<AspNetUser> _signInManager;
+        private readonly UserManager<AspNetUser> _userManager;
+        private readonly IUserStore<AspNetUser> _userStore;
+        private readonly IUserEmailStore<AspNetUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<JobEez_AppUser> userManager,
-            IUserStore<JobEez_AppUser> userStore,
-            SignInManager<JobEez_AppUser> signInManager,
+            UserManager<AspNetUser> userManager,
+            IUserStore<AspNetUser> userStore,
+            SignInManager<AspNetUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -143,7 +144,7 @@ namespace JobEez_App.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId, code, returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
@@ -151,7 +152,7 @@ namespace JobEez_App.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl });
                     }
                     else
                     {
@@ -169,27 +170,27 @@ namespace JobEez_App.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private JobEez_AppUser CreateUser()
+        private AspNetUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<JobEez_AppUser>();
+                return Activator.CreateInstance<AspNetUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(JobEez_AppUser)}'. " +
-                    $"Ensure that '{nameof(JobEez_AppUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(AspNetUser)}'. " +
+                    $"Ensure that '{nameof(AspNetUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<JobEez_AppUser> GetEmailStore()
+        private IUserEmailStore<AspNetUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<JobEez_AppUser>)_userStore;
+            return (IUserEmailStore<AspNetUser>)_userStore;
         }
     }
 }

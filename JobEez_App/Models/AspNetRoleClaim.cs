@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace JobEez_App.Models;
 
-public partial class AspNetRoleClaim
+public partial class AspNetRoleClaim : IdentityRoleClaim<string>
 {
     public int Id { get; set; }
 
@@ -13,5 +14,5 @@ public partial class AspNetRoleClaim
 
     public string? ClaimValue { get; set; }
 
-    public virtual AspNetRole Role { get; set; } = null!;
+    //public virtual AspNetRole Role { get; set; } = null!;
 }

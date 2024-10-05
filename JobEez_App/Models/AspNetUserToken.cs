@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace JobEez_App.Models;
 
-public partial class AspNetUserToken
+public partial class AspNetUserToken : IdentityUserToken<string>
 {
     public string UserId { get; set; } = null!;
 

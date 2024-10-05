@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 
 namespace JobEez_App.Models;
 
-public partial class AspNetUserLogin
+public partial class AspNetUserLogin : IdentityUserLogin<string>
 {
     public string LoginProvider { get; set; } = null!;
 

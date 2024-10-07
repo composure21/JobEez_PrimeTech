@@ -20,17 +20,17 @@
             margin-top: 40px; /* Add some space above the footer */
         }
 
-            .footer a {
-                color: white;
-                text-decoration: none;
-                margin: 0 15px;
-                font-size: 1rem;
-                transition: color 0.3s ease;
-            }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
 
-                .footer a:hover {
-                    color: #ccc; /* Slightly lighter color on hover */
-                }
+        .footer a:hover {
+            color: #ccc; /* Slightly lighter color on hover */
+        }
 
         .search-box {
             display: flex;
@@ -58,9 +58,9 @@
             transition: background-color 0.3s ease;
         }
 
-            .search-button:hover {
-                background-color: #218838;
-            }
+        .search-button:hover {
+            background-color: #218838;
+        }
 
         body {
             margin: 0;
@@ -120,17 +120,17 @@
             transition: background-color 0.3s ease;
         }
 
-            .button:hover {
-                background-color: #218838;
-            }
+        .button:hover {
+            background-color: #218838;
+        }
 
         .button-secondary {
             background-color: #6c757d;
         }
 
-            .button-secondary:hover {
-                background-color: #5a6268;
-            }
+        .button-secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -150,7 +150,14 @@
                     <p class="custom-small-text">Create your CV. Take your career to the next level.</p>
                     <p class="custom-small-text">Find great talent. Build your business.</p>
                     <div class="button-container">
-                        <a asp-action="Create" class="btn bg-success">Create CV</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                                <a asp-action="Create" class="btn bg-success">Create CV</a>
+                        }
+                        else
+                        {
+                                <button class="btn btn-secondary" disabled>Create CV (Login Required)</button>
+                        }
                     </div>
                 </div>
                 <div class="image-container">
@@ -180,7 +187,9 @@
             </div>
         </div>
     </section>
+
     <footer class="footer">
+        <!-- Footer content here -->
     </footer>
 </body>
 </html>

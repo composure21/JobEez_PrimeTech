@@ -1,0 +1,109 @@
+﻿@model IEnumerable<JobEez_App.Models.BuildResume> // Make sure this model is relevant to your CV data
+@{
+    ViewData["Title"] = "Available CVs";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the same layout as before
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        /* Add your custom styles here */
+        .search-box {
+            display: flex;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .search-button:hover {
+                background-color: #218838;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .footer {
+            background-color: #28a745; /* Green background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px; /* Add some space above the footer */
+        }
+    </style>
+</head>
+<body>
+    <!-- Search Box -->
+    <form action="@Url.Action("AvailableCVs", "BuildResumes")" method="GET" class="search-box">
+        <input type="text" class="search-input" placeholder="Search for CVs..." aria-label="Search for CVs" name="searchTerm" />
+        <button type="submit" class="search-button">Search</button>
+    </form>
+
+    <div class="container">
+        <h2 class="my-4">Available CVs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th> <!-- Adjust according to your model -->
+                    <th>Job Title</th> <!-- Adjust according to your model -->
+                    <th>Company</th> <!-- Adjust according to your model -->
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cv in Model)
+                {
+                    <tr>
+                        <td>@cv.FullName</td> <!-- Change to the appropriate property -->
+                        <td>@cv.JobTitle</td> <!-- Change to the appropriate property -->
+                        <td>@cv.Company</td> <!-- Change to the appropriate property -->
+                        <td>
+                            <a  asp-action="Details" asp-route-id="@cv.PersonalInfoId" class="btn bg-success">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        &copy; 2024 - JobEez_App
+    </footer>
+</body>
+</html>

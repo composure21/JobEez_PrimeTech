@@ -21,7 +21,9 @@ namespace JobEez_App.Controllers
         // GET: BuildResumes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BuildResumes.ToListAsync());
+            //return View(await _context.BuildResumes.ToListAsync());
+            var resumes = await _context.BuildResumes.ToListAsync();
+            return View(resumes);
         }
 
         // GET: BuildResumes/Details
@@ -172,5 +174,22 @@ namespace JobEez_App.Controllers
             }
             return View(buildResume);
         }
+        public IActionResult AvailableCVs(string searchTerm)
+        {
+            var cvs = _context.BuildResumes.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                cvs = cvs.Where(cv =>
+                    cv.FullName.Contains(searchTerm) ||
+                    cv.JobTitle.Contains(searchTerm) ||
+                    cv.Company.Contains(searchTerm));
+            }
+
+            var model = cvs.ToList();
+            return View(model);
+        }
+
+
     }
 }

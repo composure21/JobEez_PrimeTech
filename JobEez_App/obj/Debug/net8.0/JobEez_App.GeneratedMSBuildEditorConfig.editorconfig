@@ -54,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/BuildResumes/AvailableCVs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVpbGRSZXN1bWVzXEF2YWlsYWJsZUNWcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/BuildResumes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVpbGRSZXN1bWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

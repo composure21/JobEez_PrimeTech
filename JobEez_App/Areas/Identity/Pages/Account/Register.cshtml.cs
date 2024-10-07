@@ -115,6 +115,8 @@ namespace JobEez_App.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Please select a role.")]
             [Display(Name = "Role")]
             public string Role { get; set; }
+            // Add this new property
+            public bool Agreement { get; set; }
         }
 
 

@@ -55,7 +55,7 @@
                                 <span asp-validation-for="FullName" class="text-danger"></span>
                             </div>
                         </div>
-
+                        <input type="hidden" asp-for="UserId" />
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="PhoneNumber" class="control-label"></label>
@@ -98,19 +98,22 @@
 
                         <script>
                             function handleFilePreview(input) {
-                                var file = input.files[0];
-                                if (file) {
-                                    // Only show preview if the selected file is an image (jpg, jpeg, png)
-                                    if (file.type.startsWith("image/")) {
+                                var files = input.files;
+                                var previewContainer = document.getElementById('PreviewPhoto');
+                                previewContainer.innerHTML = ""; // Clear previous previews
+
+                                for (var i = 0; i < files.length; i++) {
+                                    var file = files[i];
+                                    if (file && file.type.startsWith("image/")) {
                                         var reader = new FileReader();
                                         reader.onload = function (e) {
-                                            document.getElementById('PreviewPhoto').src = e.target.result;
-                                            document.getElementById('PreviewPhoto').style.display = 'block';
+                                            var img = document.createElement('img');
+                                            img.src = e.target.result;
+                                            img.style.marginTop = '10px';
+                                            img.style.maxWidth = '100px';
+                                            previewContainer.appendChild(img);
                                         };
                                         reader.readAsDataURL(file);
-                                    } else {
-                                        // Hide preview if the file is not an image
-                                        document.getElementById('PreviewPhoto').style.display = 'none';
                                     }
                                 }
                             }

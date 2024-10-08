@@ -99,6 +99,7 @@ namespace JobEez_App.Models
                 entity.Property(e => e.WorkLocation).HasMaxLength(255).HasColumnName("work_location");
                 entity.Property(e => e.WorkerEndDate).HasColumnName("worker_end_date");
                 entity.Property(e => e.WorkerStartDate).HasColumnName("worker_start_date");
+                entity.Property(e => e.UserId).HasColumnName("UserId");
             });
 
             //// Ensure that the Identity entity types are configured properly

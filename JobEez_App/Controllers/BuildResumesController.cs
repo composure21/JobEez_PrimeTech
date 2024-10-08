@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobEez_App.Models;
+using System.Security.Claims;
 
 namespace JobEez_App.Controllers
 {
@@ -50,71 +51,180 @@ namespace JobEez_App.Controllers
             return View();
         }
 
+        //// POST: BuildResumes/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("PersonalInfoId,FullName,PhoneNumber,Address,LinkedinUrl,PhotoUrl,CareerObjective,Degree,Institution,EdLocation,GraduationYear,RelevantCoursesAchievements,JobTitle,Company,WorkLocation,WorkerStartDate,WorkerEndDate,Responsibilities,SkillName,SkillType,Language,Proficiency,CertificationName,VolunteerRole,Organization,VolunteerStartDate,VolunteerEndDate,VolunteerResponsibilities")] BuildResume buildResume)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Assign the user_id from the current user
+        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Assuming you are using Identity
+        //        buildResume.user_id = userId;
+
+        //        _context.Add(buildResume);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Details", new { id = buildResume.PersonalInfoId });
+        //    }
+        //    return View(buildResume);
+        //}
         // POST: BuildResumes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PersonalInfoId,FullName,PhoneNumber,Address,LinkedinUrl,PhotoUrl,CareerObjective,Degree,Institution,EdLocation,GraduationYear,RelevantCoursesAchievements,JobTitle,Company,WorkLocation,WorkerStartDate,WorkerEndDate,Responsibilities,SkillName,SkillType,Language,Proficiency,CertificationName,VolunteerRole,Organization,VolunteerStartDate,VolunteerEndDate,VolunteerResponsibilities")] BuildResume buildResume)
         {
-            if (ModelState.IsValid)
+            // Set the user_id from the currently logged-in user
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
             {
-                _context.Add(buildResume);
+                ModelState.AddModelError("", "User ID could not be determined. Please log in and try again.");
+                return View(buildResume); // Return view with the current model data
+            }
+
+            buildResume.UserId = userId; // Ensure UserId is set
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                ModelState.AddModelError("", "You must be logged in to create a resume.");
+                return View(buildResume);
+            }
+
+            //// Check if the model state is valid
+            //if (!ModelState.IsValid)
+            //{
+            //    // Log model state errors for debugging
+            //    Console.WriteLine("Model state is invalid.");
+            //    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            //    {
+            //        Console.WriteLine(error.ErrorMessage); // Logging for debugging
+            //    }
+            //    return View(buildResume); // Return view with the current model data
+            //}
+
+            // Check if Responsibilities is populated
+            if (string.IsNullOrWhiteSpace(buildResume.Responsibilities))
+            {
+                ModelState.AddModelError("Responsibilities", "Responsibilities are required.");
+                return View(buildResume);
+            }
+
+            // Add the new BuildResume entry to the context
+            _context.Add(buildResume);
+
+            try
+            {
+                // Save changes to the database
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", new { id = buildResume.PersonalInfoId });
             }
+            catch (DbUpdateException ex)
+            {
+                // Log the error details
+                Console.WriteLine($"Database update error: {ex.Message}");
+                ModelState.AddModelError("", "Unable to save changes. Please try again later.");
+            }
+            catch (Exception ex)
+            {
+                // Log unexpected error details
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                ModelState.AddModelError("", "An unexpected error occurred. Please try again later.");
+            }
+
+            // If we get to this point, something went wrong, return the view with model errors
             return View(buildResume);
         }
 
+
+        //// GET: BuildResumes/Edit/5
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var buildResume = await _context.BuildResumes.FindAsync(id);
+        //    if (buildResume == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(buildResume);
+        //}
+        // GET: BuildResumes/Edit
         // GET: BuildResumes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID
+            Console.WriteLine($"UserId: {userId}, PersonalInfoId: {id}"); // Log for debugging
+
+            // Fetch the resume associated with the userId
+            var resume = _context.BuildResumes.FirstOrDefault(r => r.UserId == userId);
+
+            if (resume == null)
             {
-                return NotFound();
+                return RedirectToAction("Create", "BuildResumes"); // Handle case where CV does not exist
             }
 
-            var buildResume = await _context.BuildResumes.FindAsync(id);
-            if (buildResume == null)
-            {
-                return NotFound();
-            }
-            return View(buildResume);
+            return View(resume);
         }
 
-        // POST: BuildResumes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonalInfoId,FullName,PhoneNumber,Address,LinkedinUrl,PhotoUrl,CareerObjective,Degree,Institution,EdLocation,GraduationYear,RelevantCoursesAchievements,JobTitle,Company,WorkLocation,WorkerStartDate,WorkerEndDate,Responsibilities,SkillName,SkillType,Language,Proficiency,CertificationName,VolunteerRole,Organization,VolunteerStartDate,VolunteerEndDate,VolunteerResponsibilities")] BuildResume buildResume)
+        public async Task<IActionResult> Edit(BuildResume model)
         {
-            if (id != buildResume.PersonalInfoId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                // Get the current user ID
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Fetch the resume associated with the userId
+                var existingResume = _context.BuildResumes.FirstOrDefault(r => r.UserId == userId);
+
+                if (existingResume != null)
                 {
-                    _context.Update(buildResume);
+                    // Update existing resume fields
+                    existingResume.FullName = model.FullName;
+                    existingResume.PhoneNumber = model.PhoneNumber;
+                    existingResume.Address = model.Address;
+                    existingResume.LinkedinUrl = model.LinkedinUrl;
+                    existingResume.PhotoUrl = model.PhotoUrl;
+                    existingResume.CareerObjective = model.CareerObjective;
+                    existingResume.Degree = model.Degree;
+                    existingResume.Institution = model.Institution;
+                    existingResume.EdLocation = model.EdLocation;
+                    existingResume.GraduationYear = model.GraduationYear;
+                    existingResume.RelevantCoursesAchievements = model.RelevantCoursesAchievements;
+                    existingResume.JobTitle = model.JobTitle;
+                    existingResume.Company = model.Company;
+                    existingResume.WorkLocation = model.WorkLocation;
+                    existingResume.WorkerStartDate = model.WorkerStartDate;
+                    existingResume.WorkerEndDate = model.WorkerEndDate;
+                    existingResume.Responsibilities = model.Responsibilities;
+                    existingResume.SkillName = model.SkillName;
+                    existingResume.SkillType = model.SkillType;
+                    existingResume.Language = model.Language;
+                    existingResume.Proficiency = model.Proficiency;
+                    existingResume.CertificationName = model.CertificationName;
+                    existingResume.VolunteerRole = model.VolunteerRole;
+                    existingResume.Organization = model.Organization;
+                    existingResume.VolunteerStartDate = model.VolunteerStartDate;
+                    existingResume.VolunteerEndDate = model.VolunteerEndDate;
+                    existingResume.VolunteerResponsibilities = model.VolunteerResponsibilities;
+
+                    // Save changes to the database
                     await _context.SaveChangesAsync();
+
+                    // Redirect to the Index action after successful update
+                    return RedirectToAction(nameof(Index)); // Redirect to the appropriate action
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BuildResumeExists(buildResume.PersonalInfoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
-            return View(buildResume);
+
+            // Return the model in case of errors
+            return View(model);
         }
 
         // GET: BuildResumes/Delete/5

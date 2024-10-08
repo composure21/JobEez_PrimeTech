@@ -42,6 +42,12 @@
                                 </li>
                             }
                         }
+                        @if (User.IsInRole("Employee")) // Check if the user is an employee
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="BuildResumes" asp-action="Edit">Edit CV</a>
+                            </li>
+                        }
                     </ul>
                     <div class="d-flex">
                         <partial name="_LoginPartial" />

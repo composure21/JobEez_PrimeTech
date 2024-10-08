@@ -78,4 +78,7 @@ public partial class BuildResume
 
     [Display(Name = "Volunteer Responsibilities")]
     public string VolunteerResponsibilities { get; set; } = null!;
+
+    [Required]
+    public string UserId { get; set; }
 }

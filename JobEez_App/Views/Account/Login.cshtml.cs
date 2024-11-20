@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using JobEez_App.Models;
 
-namespace JobEez_App.Areas.Identity.Pages.Account
+namespace JobEez_App.Views.Account
 {
     public class LoginModel : PageModel
     {

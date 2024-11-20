@@ -10,14 +10,25 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("JobEez_AppContextConnection")
                        ?? throw new InvalidOperationException("Connection string 'JobEez_AppContextConnection' not found.");
 
+// Bind PayFast settings to the PayFastSettings class and add it to DI container
+builder.Services.Configure<PayFastSettings>(builder.Configuration.GetSection("PayFast"));
+
+
 // Register the single DbContext
 builder.Services.AddDbContext<JobEezPrimeTechContext>(options =>
     options.UseSqlServer(connectionString));
 
-
+//Identity Services
 builder.Services.AddIdentity<AspNetUser, IdentityRole>()
     .AddEntityFrameworkStores<JobEezPrimeTechContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
 
 // Add other services to the container
 builder.Services.AddControllersWithViews();
@@ -47,6 +58,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=BuildResumes}/{action=Index}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "payment",
+//    pattern: "{controller=Payment}/{action=Index}/{id?}");
 
 
 app.MapRazorPages();

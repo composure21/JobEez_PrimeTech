@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobEez_App.Models;
 using System.Security.Claims;
+using System.Text;
 
 namespace JobEez_App.Controllers
 {
     public class BuildResumesController : Controller
     {
         private readonly JobEezPrimeTechContext _context;
-
-        public BuildResumesController(JobEezPrimeTechContext context)
+        private readonly ILogger<AccountController> _logger;
+        public BuildResumesController(JobEezPrimeTechContext context, ILogger<AccountController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: BuildResumes
@@ -269,6 +271,87 @@ namespace JobEez_App.Controllers
         public IActionResult Register()
         {
             return View(); // Create a view named Register.cshtml in the corresponding Views/BuildResumes folder
+        }
+        [HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> PayFastReturn()
+        {
+            try
+            {
+                // Retrieve the form data from PayFast
+                var formData = await Request.ReadFormAsync();
+
+                // Log the form data for debugging purposes
+                _logger.LogInformation("PayFast Return received: {FormData}", formData);
+
+                // Prepare data for validation request
+                var queryParams = new Dictionary<string, string>
+        {
+            { "pf_payment_id", formData["pf_payment_id"] },
+            { "pf_order_id", formData["pf_order_id"] },
+            { "payment_status", formData["status"] },
+            { "amount_gross", formData["amount_gross"] },
+            { "amount_fee", formData["amount_fee"] },
+            { "amount_settlement", formData["amount_settlement"] },
+            { "item_name", formData["item_name"] },
+            { "item_description", formData["item_description"] },
+            { "payment_date", formData["payment_date"] },
+            { "payment_time", formData["payment_time"] },
+            { "token", formData["token"] },
+            { "passphrase", "bcad3will2024" } // Replace with your passphrase
+        };
+
+                // Create the query string for validation
+                var queryString = string.Join("&", queryParams.Select(kv => $"{kv.Key}={Uri.EscapeDataString(kv.Value)}"));
+
+                // Send the validation request to PayFast
+                var validationUrl = "https://sandbox.payfast.co.za/eng/query/validate";
+                using (var httpClient = new HttpClient())
+                {
+                    var response = await httpClient.PostAsync(validationUrl, new StringContent(queryString, Encoding.UTF8, "application/x-www-form-urlencoded"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        _logger.LogInformation("PayFast validation response: {Response}", result);
+
+                        // Check if payment is successful
+                        if (result.Contains("VALID"))
+                        {
+                            // Payment is valid, proceed with processing
+                            var user = await _context.AspNetUsers.FirstOrDefaultAsync(u => u.PayFastPaymentId == formData["pf_payment_id"]);
+                            if (user != null)
+                            {
+                                user.HasPaid = true;
+                                user.PaymentDate = DateTime.UtcNow;
+                                _context.Update(user);
+                                await _context.SaveChangesAsync();
+
+                                _logger.LogInformation("Payment successfully processed for user: " + user.UserName);
+                                return RedirectToAction("PaymentSuccess");
+                            }
+                        }
+                        else
+                        {
+                            _logger.LogWarning("Payment validation failed. Response: {Response}", result);
+                            return RedirectToAction("PaymentFailed");
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogError("PayFast validation request failed. Status code: {StatusCode}", response.StatusCode);
+                        return RedirectToAction("PaymentFailed");
+                    }
+                }
+
+                // Fallback return if no condition is met (though this case should not happen if all paths are handled)
+                return RedirectToAction("PaymentFailed");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the PayFast return.");
+                return StatusCode(500, "Internal server error.");
+            }
         }
 
         // POST: BuildResumes/Register

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobEez_App.Controllers
 {
+    //Code Attribution: https://learn.microsoft.com/en-us/aspnet/web-api/overview/older-versions/using-web-api-1-with-entity-framework-5/using-web-api-with-entity-framework-part-3
     public class AdminController : Controller
     {
         private readonly UserManager<AspNetUser> _userManager;

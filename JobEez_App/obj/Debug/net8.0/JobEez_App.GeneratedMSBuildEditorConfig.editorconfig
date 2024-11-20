@@ -26,16 +26,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Matthew Scruse\source\repos\mystus\nxip\JobEez_PrimeTech\JobEez_App
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Areas/Identity/Pages/Account/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Areas/Identity/Pages/Account/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Areas/Identity/Pages/Account/_ViewImports.cshtml]
@@ -52,6 +44,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/BuildResumes/AvailableCVs.cshtml]
@@ -84,6 +84,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Payment/CreatePayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxDcmVhdGVQYXltZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Payment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Payment/PaymentCancelled.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxQYXltZW50Q2FuY2VsbGVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Payment/PaymentFailed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxQYXltZW50RmFpbGVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Payment/PaymentSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxQYXltZW50U3VjY2Vzcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Matthew Scruse/source/repos/mystus/nxip/JobEez_PrimeTech/JobEez_App/Views/Shared/Error.cshtml]

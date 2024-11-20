@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using JobEez_App.Models;
 
-namespace JobEez_App.Areas.Identity.Pages.Account
+namespace JobEez_App.Views.Account
 {
     public class RegisterModel : PageModel
     {
@@ -31,13 +31,15 @@ namespace JobEez_App.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AspNetUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<AspNetUser> userManager,
             IUserStore<AspNetUser> userStore,
             SignInManager<AspNetUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +47,7 @@ namespace JobEez_App.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -124,6 +127,19 @@ namespace JobEez_App.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            // Ensure roles exist (you may want to call this somewhere else in your application, like in ConfigureServices)
+            var roleExists = await _roleManager.RoleExistsAsync("Employee");
+            if (!roleExists)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+
+            roleExists = await _roleManager.RoleExistsAsync("Employer");
+            if (!roleExists)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Employer"));
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -141,14 +157,22 @@ namespace JobEez_App.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                // Add the selected role to the user
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Assign the role to the user
-                    await _userManager.AddToRoleAsync(user, Input.Role);
+                    // Assign the selected role to the user
+                    var roleExists = await _roleManager.RoleExistsAsync(Input.Role);
+                    if (roleExists)
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "The selected role does not exist.");
+                        return Page();
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -179,9 +203,9 @@ namespace JobEez_App.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
         private AspNetUser CreateUser()
         {

@@ -14,12 +14,30 @@ namespace JobEez_App.Models
         {
         }
         public virtual DbSet<BuildResume> BuildResumes { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
 
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Data Source=DESKTOP-41TI68C;Initial Catalog=JobEez_PrimeTech; Encrypt=False; Integrated Security=True;Trust Server Certificate=True");
+        //    }
+        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-41TI68C;Initial Catalog=JobEez_PrimeTech; Encrypt=False; Integrated Security=True;Trust Server Certificate=True");
+                // Build configuration from appsettings.json
+                var config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory()) // Set the base path
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                // Get the connection string from the configuration
+                var connectionString = config.GetConnectionString("JobEez_AppContextConnection");
+
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 

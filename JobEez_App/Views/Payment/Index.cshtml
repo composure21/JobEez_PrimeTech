@@ -1,0 +1,37 @@
+﻿@model JobEez_App.Models.PaymentViewModel
+
+@{
+    ViewData["Title"] = "Payment Page";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="CreatePayment" method="post">
+            <div class="form-group">
+                <label for="ItemName">Item Name</label>
+                <input type="text" class="form-control" id="ItemName" name="ItemName" value="@Model.ItemName" required />
+            </div>
+            <div class="form-group">
+                <label for="Amount">Amount</label>
+                <input type="text" class="form-control" id="Amount" name="Amount" value="@Model.Amount" required />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (TempData["PaymentError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["PaymentError"]
+    </div>
+}
+

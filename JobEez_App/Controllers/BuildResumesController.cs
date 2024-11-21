@@ -75,7 +75,7 @@ namespace JobEez_App.Controllers
         // POST: BuildResumes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonalInfoId,FullName,PhoneNumber,Address,LinkedinUrl,PhotoUrl,CareerObjective,Degree,Institution,EdLocation,GraduationYear,RelevantCoursesAchievements,JobTitle,Company,WorkLocation,WorkerStartDate,WorkerEndDate,Responsibilities,SkillName,SkillType,Language,Proficiency,CertificationName,VolunteerRole,Organization,VolunteerStartDate,VolunteerEndDate,VolunteerResponsibilities")] BuildResume buildResume)
+        public async Task<IActionResult> Create([Bind("PersonalInfoId,FullName,PhoneNumber,Address,LinkedinUrl,PhotoUrl,CareerObjective,Degree,Institution,EdLocation,GraduationYear,RelevantCoursesAchievements,JobTitle,JobTitle1,JobTitle2,Company,Company1,Company2,WorkLocation,WorkLocation1,WorkLocation2,WorkerStartDate,WorkerStartDate1,WorkerStartDate2,WorkerEndDate,WorkerEndDate1,WorkerEndDate2,Responsibilities,Responsibilities1,Responsibilities2,SkillName,SkillType,Language,Proficiency,CertificationName,VolunteerRole,Organization,VolunteerStartDate,VolunteerEndDate,VolunteerResponsibilities")] BuildResume buildResume)
         {
             // Set the user_id from the currently logged-in user
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -200,12 +200,31 @@ namespace JobEez_App.Controllers
                     existingResume.EdLocation = model.EdLocation;
                     existingResume.GraduationYear = model.GraduationYear;
                     existingResume.RelevantCoursesAchievements = model.RelevantCoursesAchievements;
+
+                    //work experience
                     existingResume.JobTitle = model.JobTitle;
                     existingResume.Company = model.Company;
                     existingResume.WorkLocation = model.WorkLocation;
                     existingResume.WorkerStartDate = model.WorkerStartDate;
                     existingResume.WorkerEndDate = model.WorkerEndDate;
                     existingResume.Responsibilities = model.Responsibilities;
+                    //work experience 1
+                    existingResume.JobTitle1 = model.JobTitle1;
+                    existingResume.Company1 = model.Company1;
+                    existingResume.WorkLocation1 = model.WorkLocation1;
+                    existingResume.WorkerStartDate1 = model.WorkerStartDate1;
+                    existingResume.WorkerEndDate1 = model.WorkerEndDate1;
+                    existingResume.Responsibilities1 = model.Responsibilities1;
+
+                    //work experience 2
+                    existingResume.JobTitle2 = model.JobTitle2;
+                    existingResume.Company2 = model.Company2;
+                    existingResume.WorkLocation2 = model.WorkLocation2;
+                    existingResume.WorkerStartDate2 = model.WorkerStartDate2;
+                    existingResume.WorkerEndDate2 = model.WorkerEndDate2;
+                    existingResume.Responsibilities2 = model.Responsibilities2;
+
+
                     existingResume.SkillName = model.SkillName;
                     existingResume.SkillType = model.SkillType;
                     existingResume.Language = model.Language;

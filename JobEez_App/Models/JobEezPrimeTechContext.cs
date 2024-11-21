@@ -93,13 +93,39 @@ namespace JobEez_App.Models
                 entity.Property(e => e.Address).HasMaxLength(255).HasColumnName("address");
                 entity.Property(e => e.CareerObjective).HasColumnName("career_objective");
                 entity.Property(e => e.CertificationName).HasMaxLength(255).HasColumnName("certification_name");
+
+                entity.Property(e => e.JobTitle).HasMaxLength(255).HasColumnName("job_title");
+                entity.Property(e => e.JobTitle1).HasMaxLength(255).HasColumnName("job_title1");
+                entity.Property(e => e.JobTitle2).HasMaxLength(255).HasColumnName("job_title2");
+
                 entity.Property(e => e.Company).HasMaxLength(255).HasColumnName("company");
+                entity.Property(e => e.Company1).HasMaxLength(255).HasColumnName("company1");
+                entity.Property(e => e.Company2).HasMaxLength(255).HasColumnName("company2");
+
+                entity.Property(e => e.WorkLocation).HasMaxLength(255).HasColumnName("work_location");
+                entity.Property(e => e.WorkLocation1).HasMaxLength(255).HasColumnName("work_location1");
+                entity.Property(e => e.WorkLocation2).HasMaxLength(255).HasColumnName("work_location2");
+
+                entity.Property(e => e.WorkerEndDate).HasColumnName("worker_end_date");
+                entity.Property(e => e.WorkerEndDate1).HasColumnName("worker_end_date1");
+                entity.Property(e => e.WorkerEndDate2).HasColumnName("worker_end_date2");
+
+                entity.Property(e => e.WorkerStartDate).HasColumnName("worker_start_date");
+                entity.Property(e => e.WorkerStartDate1).HasColumnName("worker_start_date1");
+                entity.Property(e => e.WorkerStartDate2).HasColumnName("worker_start_date2");
+
+                entity.Property(e => e.Responsibilities).HasColumnName("responsibilities");
+                entity.Property(e => e.Responsibilities1).HasColumnName("responsibilities1");
+                entity.Property(e => e.Responsibilities2).HasColumnName("responsibilities2");
+
                 entity.Property(e => e.Degree).HasMaxLength(255).HasColumnName("degree");
                 entity.Property(e => e.EdLocation).HasMaxLength(255).HasColumnName("ed_location");
                 entity.Property(e => e.FullName).HasMaxLength(255).HasColumnName("full_name");
                 entity.Property(e => e.GraduationYear).HasColumnName("graduation_year");
                 entity.Property(e => e.Institution).HasMaxLength(255).HasColumnName("institution");
-                entity.Property(e => e.JobTitle).HasMaxLength(255).HasColumnName("job_title");
+
+            
+
                 entity.Property(e => e.Language).HasMaxLength(255).HasColumnName("language");
                 entity.Property(e => e.LinkedinUrl).HasMaxLength(255).HasColumnName("linkedin_url");
                 entity.Property(e => e.Organization).HasMaxLength(255).HasColumnName("organization");
@@ -107,16 +133,14 @@ namespace JobEez_App.Models
                 entity.Property(e => e.PhotoUrl).HasMaxLength(255).HasColumnName("photo_url");
                 entity.Property(e => e.Proficiency).HasMaxLength(50).HasColumnName("proficiency");
                 entity.Property(e => e.RelevantCoursesAchievements).HasColumnName("relevant_courses_achievements");
-                entity.Property(e => e.Responsibilities).HasColumnName("responsibilities");
+               
                 entity.Property(e => e.SkillName).HasMaxLength(255).HasColumnName("skill_name");
                 entity.Property(e => e.SkillType).HasMaxLength(20).HasColumnName("skill_type");
                 entity.Property(e => e.VolunteerEndDate).HasColumnName("volunteer_end_date");
                 entity.Property(e => e.VolunteerResponsibilities).HasColumnName("volunteer_responsibilities");
                 entity.Property(e => e.VolunteerRole).HasMaxLength(255).HasColumnName("volunteer_role");
                 entity.Property(e => e.VolunteerStartDate).HasColumnName("volunteer_start_date");
-                entity.Property(e => e.WorkLocation).HasMaxLength(255).HasColumnName("work_location");
-                entity.Property(e => e.WorkerEndDate).HasColumnName("worker_end_date");
-                entity.Property(e => e.WorkerStartDate).HasColumnName("worker_start_date");
+               
                 entity.Property(e => e.UserId).HasColumnName("UserId");
             });
 

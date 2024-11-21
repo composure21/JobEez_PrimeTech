@@ -35,14 +35,30 @@ public partial class BuildResume
 
     [Display(Name = "Course Achievements")]
     public string? RelevantCoursesAchievements { get; set; }
+    // Work experience Region
 
     [Display(Name = "Job Title")]
     public string JobTitle { get; set; } = null!;
 
+    [Display(Name = "Job Title")]
+    public string? JobTitle1 { get; set; } = null!;
+    [Display(Name = "Job Title")]
+    public string? JobTitle2 { get; set; } = null!;
+
+    [Display(Name = "Company")]
     public string Company { get; set; } = null!;
+
+    [Display(Name = "Company")]
+    public string? Company1 { get; set; } = null!;
+    [Display(Name = "Company")]
+    public string? Company2 { get; set; } = null!;
 
     [Display(Name = "Location")]
     public string WorkLocation { get; set; } = null!;
+    [Display(Name = "Location")]
+    public string? WorkLocation1 { get; set; } = null!;
+    [Display(Name = "Location")]
+    public string? WorkLocation2 { get; set; } = null!;
 
     [Display(Name = "Start Date")]
     public DateTime WorkerStartDate { get; set; }
@@ -50,7 +66,24 @@ public partial class BuildResume
     [Display(Name = "End Date")]
     public DateTime? WorkerEndDate { get; set; }
 
+    [Display(Name = "Start Date")]
+    public DateTime? WorkerStartDate1 { get; set; }
+
+    [Display(Name = "End Date")]
+    public DateTime? WorkerEndDate1 { get; set; }
+
+    [Display(Name = "Start Date")]
+    public DateTime? WorkerStartDate2 { get; set; }
+
+    [Display(Name = "End Date")]
+    public DateTime? WorkerEndDate2 { get; set; }
+
+    [Display(Name = "Responsibilities")]
     public string Responsibilities { get; set; } = null!;
+    [Display(Name = "Responsibilities")]
+    public string? Responsibilities1 { get; set; } = null!;
+    [Display(Name = "Responsibilities")]
+    public string? Responsibilities2 { get; set; } = null!;
 
     [Display(Name = "Skill Name")]
     public string SkillName { get; set; } = null!;

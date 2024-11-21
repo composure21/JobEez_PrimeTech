@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JobEez_App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7831971ddc61ca961ea2d1dbdb64e522fa1459b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5983c75c4bc39f40b5d479f30f5b9a801b666fcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("JobEez_App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JobEez_App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

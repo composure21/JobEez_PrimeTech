@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-and-analyze:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0  # Use the .NET SDK Docker image
+      - image: mcr.microsoft.com/dotnet/sdk:8.0  # Use the .NET SDK Docker image
     steps:
       - checkout
       

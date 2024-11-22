@@ -23,8 +23,8 @@ jobs:
           command: "echo Hello, World!"
 
   sonarqube:
-    working_directory: ~/build
-    docker:
+     working_directory: ~/build
+     docker:
        - image: sonarsource/sonar-scanner-cli
      resource_class: small
      steps:

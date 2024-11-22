@@ -1,56 +1,53 @@
 version: 2.1
 
 jobs:
-  # Hello World Job
-  say-hello:
+  build-and-analyze:
     docker:
-      - image: cimg/base:stable
+      - image: mcr.microsoft.com/dotnet/sdk:6.0  # Use the .NET SDK Docker image
     steps:
       - checkout
+      
+      # Install SonarScanner for .NET
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Install SonarScanner for .NET
+          command: |
+            dotnet tool install --global dotnet-sonarscanner
+            echo 'export PATH=$PATH:/root/.dotnet/tools' >> $BASH_ENV
+            source $BASH_ENV
+            dotnet-sonarscanner --version
 
-  # SonarQube Job
-  sonarqube:
-    working_directory: ~/build
-    docker:
-      - image: cimg/base:stable
-    resource_class: small
-    steps:
-      - checkout
+      # Start SonarScanner
       - run:
-          name: Install SonarQube CLI
+          name: Start SonarQube Analysis
           command: |
-            echo "Installing SonarQube CLI..."
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-            unzip sonar-scanner-cli-4.7.0.2747-linux.zip
-            mv sonar-scanner-4.7.0.2747-linux ~/sonar-scanner
-            echo "Installation complete. Verifying installation..."
-            ls -al ~/sonar-scanner/bin
+            export PATH=$PATH:/root/.dotnet/tools
+            dotnet-sonarscanner begin \
+              /k:"$SONAR_PROJECT_KEY" \
+              /o:"$SONAR_ORG" \
+              /d:sonar.host.url="https://sonarcloud.io" \
+              /d:sonar.login="$SONAR_TOKEN" \
+              /d:sonar.exclusions="**/bin/**,**/obj/**"
+
+      # Build the ASP.NET Core Web API
       - run:
-          name: Verify SonarQube Installation
+          name: Build the Web API
           command: |
-            ~/sonar-scanner/bin/sonar-scanner --version || echo "SonarQube CLI not installed correctly."
+            dotnet restore
+            dotnet build --no-incremental --configuration Release
+
+      # Run Tests (Optional)
       - run:
-          name: Run SonarQube Scanner
+          name: Run Tests
           command: |
-            echo "Running SonarQube Scanner..."
-            export PATH=$PATH:~/sonar-scanner/bin
-            SONAR_BRANCH="${CIRCLE_BRANCH:-master}"
-            echo "Sonar branch value is: $SONAR_BRANCH"
-            echo "Sonar org value is: $SONAR_ORG"
-            ~/sonar-scanner/bin/sonar-scanner \
-              -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
-              -Dsonar.organization="$SONAR_ORG" \
-              -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.exclusions="**/android/**,**/ios/**" \
-              -Dsonar.login="$SONAR_TOKEN" \
-              -Dsonar.branch.name="$SONAR_BRANCH" \
-              -Dsonar.sources="."
+            dotnet test --no-build --configuration Release
+
+      # Complete SonarQube Analysis
+      - run:
+          name: Complete SonarQube Analysis
+          command: |
+            dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
 workflows:
-  say-hello-workflow:
+  build-and-analyze-workflow:
     jobs:
-      - say-hello
-      - sonarqube
+      - build-and-analyze

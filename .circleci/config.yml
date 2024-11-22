@@ -22,7 +22,7 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
 
-sonarqube:
+  sonarqube:
      working_directory: ~/build
      docker:
        - image: sonarsource/sonar-scanner-cli
@@ -51,4 +51,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello
-      -sonarqube
+      - sonarqube

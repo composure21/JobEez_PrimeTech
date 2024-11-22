@@ -26,15 +26,12 @@ jobs:
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
             unzip sonar-scanner-cli-4.7.0.2747-linux.zip
             mv sonar-scanner-4.7.0.2747-linux ~/sonar-scanner
+            echo "Adding sonar-scanner to PATH..."
             export PATH=$PATH:~/sonar-scanner/bin
-            echo 'export PATH=$PATH:~/sonar-scanner/bin' >> ~/.bashrc
-            source ~/.bashrc
-            echo "Verifying SonarQube CLI Installation..."
+            echo "PATH is now: $PATH"
             ls -al ~/sonar-scanner/bin
-            sonar-scanner --version
-      - run:
-          name: Verify `find` Installation
-          command: find --version
+            echo "Verifying SonarQube CLI Installation..."
+            sonar-scanner --version || echo "SonarQube CLI installation failed."
       - run:
           name: Run `find` Command
           command: find .

@@ -14,9 +14,9 @@ jobs:
             dotnet tool install --global dotnet-sonarscanner
             echo 'export PATH=$PATH:/root/.dotnet/tools' >> $BASH_ENV
             source $BASH_ENV
-            dotnet-sonarscanner --version
+            echo "SonarScanner for .NET installed successfully."
 
-      # Start SonarScanner
+      # Start SonarQube Analysis
       - run:
           name: Start SonarQube Analysis
           command: |
@@ -45,6 +45,7 @@ jobs:
       - run:
           name: Complete SonarQube Analysis
           command: |
+            export PATH=$PATH:/root/.dotnet/tools
             dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
 workflows:

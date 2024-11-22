@@ -22,12 +22,16 @@ jobs:
       - run:
           name: Install SonarQube CLI
           command: |
-            echo "Installing SonarQube CLI in home directory..."
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-            unzip sonar-scanner-cli-4.7.0.2747-linux.zip
-            mv sonar-scanner-4.7.0.2747-linux ~/sonar-scanner
-            echo 'export PATH=$PATH:~/sonar-scanner/bin' >> ~/.bashrc
-            source ~/.bashrc
+                echo "Installing SonarQube CLI in home directory..."
+                wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+                unzip sonar-scanner-cli-4.7.0.2747-linux.zip
+                mv sonar-scanner-4.7.0.2747-linux ~/sonar-scanner
+                export PATH=$PATH:~/sonar-scanner/bin
+                echo 'export PATH=$PATH:~/sonar-scanner/bin' >> ~/.bashrc
+                source ~/.bashrc
+                echo "Verifying SonarQube CLI Installation..."
+                ls -al ~/sonar-scanner/bin
+                sonar-scanner --version
       - run:
           name: Verify `find` Installation
           command: find --version

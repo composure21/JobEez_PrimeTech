@@ -15,19 +15,19 @@ jobs:
   sonarqube:
     working_directory: ~/build
     docker:
-      - image: newtmitch/sonar-scanner:latest
-  
+      - image: cimg/base:stable
     resource_class: small
     steps:
       - checkout
       - run:
           name: Install SonarQube CLI
           command: |
-            echo "Installing SonarQube CLI..."
+            echo "Installing SonarQube CLI in home directory..."
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
             unzip sonar-scanner-cli-4.7.0.2747-linux.zip
-            mv sonar-scanner-4.7.0.2747-linux /usr/local/sonar-scanner
-            ln -s /usr/local/sonar-scanner/bin/sonar-scanner /usr/bin/sonar-scanner
+            mv sonar-scanner-4.7.0.2747-linux ~/sonar-scanner
+            echo 'export PATH=$PATH:~/sonar-scanner/bin' >> ~/.bashrc
+            source ~/.bashrc
       - run:
           name: Verify `find` Installation
           command: find --version

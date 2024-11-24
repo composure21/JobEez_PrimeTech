@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MaRoc\\Source\\Repos\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj": {}
+    "C:\\Users\\Matthew Scruse\\source\\repos\\mystus\\nxip\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MaRoc\\Source\\Repos\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj": {
+    "C:\\Users\\Matthew Scruse\\source\\repos\\mystus\\nxip\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MaRoc\\Source\\Repos\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj",
+        "projectUniqueName": "C:\\Users\\Matthew Scruse\\source\\repos\\mystus\\nxip\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj",
         "projectName": "JobEez_App",
-        "projectPath": "C:\\Users\\MaRoc\\Source\\Repos\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj",
-        "packagesPath": "C:\\Users\\MaRoc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MaRoc\\Source\\Repos\\JobEez_PrimeTech\\JobEez_App\\obj\\",
+        "projectPath": "C:\\Users\\Matthew Scruse\\source\\repos\\mystus\\nxip\\JobEez_PrimeTech\\JobEez_App\\JobEez_App.csproj",
+        "packagesPath": "C:\\Users\\Matthew Scruse\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Matthew Scruse\\source\\repos\\mystus\\nxip\\JobEez_PrimeTech\\JobEez_App\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\MaRoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Matthew Scruse\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -106,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

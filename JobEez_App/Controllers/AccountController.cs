@@ -60,6 +60,7 @@ namespace JobEez_App.Controllers
         {
             return View();
         }
+        //Code Attribution:https://developers.payfast.co.za/docs
 
         // POST: Register
         [HttpPost]
@@ -77,7 +78,7 @@ namespace JobEez_App.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Role = model.Role // Assuming Role is part of the RegisterViewModel
+                Role = model.Role 
             };
 
             var result = await _signInManager.UserManager.CreateAsync(user, model.Password);
@@ -116,6 +117,8 @@ namespace JobEez_App.Controllers
 
             return View(model);
         }
+
+        //Code Attribution:https://developers.payfast.co.za/docs
 
         [HttpPost]
         [HttpGet]
@@ -199,6 +202,7 @@ namespace JobEez_App.Controllers
             }
         }
 
+        //Code Attribution:https://developers.payfast.co.za/docs
 
 
         public async Task<IActionResult> UpdatePaymentId()
@@ -250,11 +254,11 @@ namespace JobEez_App.Controllers
             // Add passphrase to the data string
             data.Add("passphrase=" + key);
 
-            // Concatenate the data string and compute the signature hash
+           
             var dataString = string.Join("&", data);
             var computedSignature = GenerateSignature(dataString);
 
-            // Compare the computed signature with the signature sent by PayFast
+            
             return computedSignature == signature;
         }
 

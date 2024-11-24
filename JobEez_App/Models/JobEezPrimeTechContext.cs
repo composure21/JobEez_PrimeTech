@@ -16,14 +16,6 @@ namespace JobEez_App.Models
         public virtual DbSet<BuildResume> BuildResumes { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
 
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("Data Source=DESKTOP-41TI68C;Initial Catalog=JobEez_PrimeTech; Encrypt=False; Integrated Security=True;Trust Server Certificate=True");
-        //    }
-        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -84,9 +76,7 @@ namespace JobEez_App.Models
             // Configure BuildResume entity
             modelBuilder.Entity<BuildResume>(entity =>
             {
-                //entity.HasKey(e => e.PersonalInfoId).HasName("PK__BuildRes__0F38C33121720112");
-                //entity.ToTable("BuildResume");
-                entity.HasKey(e => e.PersonalInfoId); // Ensure this is correct
+                entity.HasKey(e => e.PersonalInfoId); 
                 entity.ToTable("BuildResume");
 
                 entity.Property(e => e.PersonalInfoId).HasColumnName("personal_info_id");
@@ -144,11 +134,6 @@ namespace JobEez_App.Models
                 entity.Property(e => e.UserId).HasColumnName("UserId");
             });
 
-            //// Ensure that the Identity entity types are configured properly
-            //modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(x => new { x.LoginProvider, x.ProviderKey });
-            //modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
-            //modelBuilder.Entity<IdentityUserClaim<string>>().HasKey(x => x.Id);
-            //modelBuilder.Entity<IdentityUserToken<string>>().HasKey(x => new { x.UserId, x.LoginProvider, x.Name });
         }
     }
 }

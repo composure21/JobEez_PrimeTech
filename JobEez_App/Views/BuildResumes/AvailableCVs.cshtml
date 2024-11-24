@@ -1,7 +1,7 @@
-﻿@model IEnumerable<JobEez_App.Models.BuildResume> // Make sure this model is relevant to your CV data
+﻿@model IEnumerable<JobEez_App.Models.BuildResume> 
 @{
     ViewData["Title"] = "Available CVs";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the same layout as before
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
     <style>
-        /* Add your custom styles here */
+
         .search-box {
             display: flex;
             margin-top: 20px;
@@ -80,9 +80,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Full Name</th> <!-- Adjust according to your model -->
-                    <th>Job Title</th> <!-- Adjust according to your model -->
-                    <th>Company</th> <!-- Adjust according to your model -->
+                    <th>Full Name</th> 
+                    <th>Job Title</th> 
+                    <th>Company</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -90,9 +90,9 @@
                 @foreach (var cv in Model)
                 {
                     <tr>
-                        <td>@cv.FullName</td> <!-- Change to the appropriate property -->
-                        <td>@cv.JobTitle</td> <!-- Change to the appropriate property -->
-                        <td>@cv.Company</td> <!-- Change to the appropriate property -->
+                        <td>@cv.FullName</td> 
+                        <td>@cv.JobTitle</td> 
+                        <td>@cv.Company</td> 
                         <td>
                             <a  asp-action="Details" asp-route-id="@cv.PersonalInfoId" class="btn bg-success">View</a>
                         </td>

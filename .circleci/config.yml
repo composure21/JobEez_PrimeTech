@@ -1,0 +1,54 @@
+version: 2.1
+
+jobs:
+  build-and-analyze:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:8.0  # Use the .NET SDK Docker image
+    steps:
+      - checkout
+      
+      # Install SonarScanner for .NET
+      - run:
+          name: Install SonarScanner for .NET
+          command: |
+            dotnet tool install --global dotnet-sonarscanner
+            echo 'export PATH=$PATH:/root/.dotnet/tools' >> $BASH_ENV
+            source $BASH_ENV
+            echo "SonarScanner for .NET installed successfully."
+
+      # Start SonarQube Analysis
+      - run:
+          name: Start SonarQube Analysis
+          command: |
+            export PATH=$PATH:/root/.dotnet/tools
+            dotnet-sonarscanner begin \
+              /k:"$SONAR_PROJECT_KEY" \
+              /o:"$SONAR_ORG" \
+              /d:sonar.host.url="https://sonarcloud.io" \
+              /d:sonar.login="$SONAR_TOKEN" \
+              /d:sonar.exclusions="**/bin/**,**/obj/**"
+
+      # Build the ASP.NET Core Web API
+      - run:
+          name: Build the Web API
+          command: |
+            dotnet restore
+            dotnet build --no-incremental --configuration Release
+
+      # Run Tests (Optional)
+      - run:
+          name: Run Tests
+          command: |
+            dotnet test --no-build --configuration Release
+
+      # Complete SonarQube Analysis
+      - run:
+          name: Complete SonarQube Analysis
+          command: |
+            export PATH=$PATH:/root/.dotnet/tools
+            dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+
+workflows:
+  build-and-analyze-workflow:
+    jobs:
+      - build-and-analyze

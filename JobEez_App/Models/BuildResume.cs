@@ -96,21 +96,21 @@ public partial class BuildResume
     public string Proficiency { get; set; } = null!;
 
     [Display(Name = "Certification Name")]
-    public string CertificationName { get; set; } = null!;
+    public string? CertificationName { get; set; }
 
     [Display(Name = "Volunteer Role")]
-    public string VolunteerRole { get; set; } = null!;
+    public string? VolunteerRole { get; set; }
 
-    public string Organization { get; set; } = null!;
+    public string? Organization { get; set; } 
 
     [Display(Name = "Volunteer Start Date")]
-    public DateTime VolunteerStartDate { get; set; }
+    public DateTime? VolunteerStartDate { get; set; }
 
     [Display(Name = "Volunteer End Date")]
     public DateTime? VolunteerEndDate { get; set; }
 
     [Display(Name = "Volunteer Responsibilities")]
-    public string VolunteerResponsibilities { get; set; } = null!;
+    public string? VolunteerResponsibilities { get; set; }
 
     [Required]
     public string UserId { get; set; }

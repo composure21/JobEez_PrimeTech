@@ -50,7 +50,7 @@
                         <div class="col-md-6">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="FullName" class="control-label"></label>
+                                <label asp-for="FullName" class="control-label">Full Name<span class="text-danger">*</span></label>
                                 <input asp-for="FullName" class="form-control" />
                                 <span asp-validation-for="FullName" class="text-danger"></span>
                             </div>
@@ -58,7 +58,7 @@
                         <input type="hidden" asp-for="UserId" />
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="PhoneNumber" class="control-label"></label>
+                                <label asp-for="PhoneNumber" class="control-label">Phone Number <span class="text-danger">*</span></label>
                                 <input asp-for="PhoneNumber" class="form-control" />
                                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
@@ -122,11 +122,95 @@
 
 
                         <!-- Career Objective -->
+                        @*  <h4 class="mt-4">Career Objective</h4>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label asp-for="CareerObjective" class="control-label"></label>
+                                 <input asp-for="CareerObjective" class="form-control" />
+                                 <span asp-validation-for="CareerObjective" class="text-danger"></span>
+                             </div>
+                         </div> *@
                         <h4 class="mt-4">Career Objective</h4>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="CareerObjective" class="control-label"></label>
-                                <input asp-for="CareerObjective" class="form-control" />
+                                <label asp-for="CareerObjective" class="control-label">Career Objectives<span class="text-danger">*</span></label>
+                                <select class="form-select" asp-for="CareerObjective">
+                                    <option value="">-- Select Career Objective --</option>
+
+                                    <!-- Technology Sector -->
+                                    <optgroup label="Technology">
+                                        <option value="Software Developer">Software Developer</option>
+                                        <option value="Data Analyst">Data Analyst</option>
+                                        <option value="Project Manager">Project Manager</option>
+                                        <option value="UX/UI Designer">UX/UI Designer</option>
+                                        <option value="Software Tester">Software Tester</option>
+                                        <option value="DevOps Engineer">DevOps Engineer</option>
+                                        <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+                                        <option value="AI/ML Engineer">AI/ML Engineer</option>
+                                        <option value="Network Engineer">Network Engineer</option>
+                                        <option value="Database Administrator">Database Administrator</option>
+                                    </optgroup>
+
+                                    <!-- Business and Management -->
+                                    <optgroup label="Business and Management">
+                                        <option value="Business Analyst">Business Analyst</option>
+                                        <option value="Human Resources Manager">Human Resources Manager</option>
+                                        <option value="Marketing Manager">Marketing Manager</option>
+                                        <option value="Sales Executive">Sales Executive</option>
+                                        <option value="Operations Manager">Operations Manager</option>
+                                        <option value="Financial Analyst">Financial Analyst</option>
+                                        <option value="Entrepreneur">Entrepreneur</option>
+                                    </optgroup>
+
+                                    <!-- Education -->
+                                    <optgroup label="Education">
+                                        <option value="School Teacher">School Teacher</option>
+                                        <option value="University Lecturer">University Lecturer</option>
+                                        <option value="Educational Consultant">Educational Consultant</option>
+                                        <option value="Training Specialist">Training Specialist</option>
+                                    </optgroup>
+
+                                    <!-- Healthcare -->
+                                    <optgroup label="Healthcare">
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Nurse">Nurse</option>
+                                        <option value="Pharmacist">Pharmacist</option>
+                                        <option value="Healthcare Administrator">Healthcare Administrator</option>
+                                        <option value="Medical Researcher">Medical Researcher</option>
+                                    </optgroup>
+
+                                    <!-- Engineering -->
+                                    <optgroup label="Engineering">
+                                        <option value="Civil Engineer">Civil Engineer</option>
+                                        <option value="Mechanical Engineer">Mechanical Engineer</option>
+                                        <option value="Electrical Engineer">Electrical Engineer</option>
+                                        <option value="Chemical Engineer">Chemical Engineer</option>
+                                        <option value="Biomedical Engineer">Biomedical Engineer</option>
+                                    </optgroup>
+
+                                    <!-- Creative Arts -->
+                                    <optgroup label="Creative Arts">
+                                        <option value="Graphic Designer">Graphic Designer</option>
+                                        <option value="Photographer">Photographer</option>
+                                        <option value="Film Director">Film Director</option>
+                                        <option value="Content Writer">Content Writer</option>
+                                        <option value="Social Media Manager">Social Media Manager</option>
+                                        <option value="Musician">Musician</option>
+                                        <option value="Visual Artist">Visual Artist</option>
+                                    </optgroup>
+
+                                    <!-- Others -->
+                                    <optgroup label="Others">
+                                        <option value="Lawyer">Lawyer</option>
+                                        <option value="Chef">Chef</option>
+                                        <option value="Architect">Architect</option>
+                                        <option value="Pilot">Pilot</option>
+                                        <option value="Real Estate Agent">Real Estate Agent</option>
+                                        <option value="Event Planner">Event Planner</option>
+                                        <option value="Athlete">Athlete</option>
+                                    </optgroup>
+                                </select>
+
                                 <span asp-validation-for="CareerObjective" class="text-danger"></span>
                             </div>
                         </div>
@@ -136,35 +220,47 @@
                         <h4 class="mt-4">Education</h4>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Institution" class="control-label"></label>
+                                <label asp-for="Institution" class="control-label">Instituion <span class="text-danger">*</span></label>
                                 <input asp-for="Institution" class="form-control" />
                                 <span asp-validation-for="Institution" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="EdLocation" class="control-label"></label>
-                                <input asp-for="EdLocation" class="form-control" />
+                                <label asp-for="EdLocation" class="control-label">Education <span class="text-danger">*</span></label>
+                                <select asp-for="EdLocation" class="form-select">
+                                    <option value="">-- Select Education Type --</option>
+                                    <option value="High School">High School</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="Undergraduate Degree">Undergraduate Degree</option>
+                                    <option value="Postgraduate Degree">Postgraduate Degree</option>
+                                    <option value="Doctorate (Ph.D.)">Doctorate (Ph.D.)</option>
+                                    <option value="Certificate">Certificate</option>
+                                    <option value="Vocational Training">Vocational Training</option>
+                                    <option value="Online Course">Online Course</option>
+                                    <option value="Apprenticeship">Apprenticeship</option>
+                                    <option value="Professional Certification">Professional Certification</option>
+                                </select>
                                 <span asp-validation-for="EdLocation" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="GraduationYear" class="control-label"></label>
-                                <input asp-for="GraduationYear" class="form-control" />
+                                <label asp-for="GraduationYear" class="control-label">Graduation Year <span class="text-danger">*</span></label>
+                                <input asp-for="GraduationYear" class="form-control" type="date" />
                                 <span asp-validation-for="GraduationYear" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Degree" class="control-label"></label>
+                                <label asp-for="Degree" class="control-label">Degree <span class="text-danger">*</span></label>
                                 <input asp-for="Degree" class="form-control" />
                                 <span asp-validation-for="Degree" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="RelevantCoursesAchievements" class="control-label"></label>
+                                <label asp-for="RelevantCoursesAchievements" class="control-label">Course Achievements <span class="text-danger">*</span></label>
                                 <input asp-for="RelevantCoursesAchievements" class="form-control" />
                                 <span asp-validation-for="RelevantCoursesAchievements" class="text-danger"></span>
                             </div>
@@ -175,28 +271,28 @@
                         <h4 class="mt-4">Work Experience</h4>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="JobTitle" class="control-label"></label>
+                                <label asp-for="JobTitle" class="control-label">Job Title <span class="text-danger">*</span></label>
                                 <input asp-for="JobTitle" class="form-control" />
                                 <span asp-validation-for="JobTitle" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Company" class="control-label"></label>
+                                <label asp-for="Company" class="control-label">Company <span class="text-danger">*</span></label>
                                 <input asp-for="Company" class="form-control" />
                                 <span asp-validation-for="Company" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="WorkLocation" class="control-label"></label>
+                                <label asp-for="WorkLocation" class="control-label">Location<span class="text-danger">*</span></label>
                                 <input asp-for="WorkLocation" class="form-control" />
                                 <span asp-validation-for="WorkLocation" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="WorkerStartDate" class="control-label"></label>
+                                <label asp-for="WorkerStartDate" class="control-label">Start Date <span class="text-danger">*</span></label>
                                 <input asp-for="WorkerStartDate" class="form-control" />
                                 <span asp-validation-for="WorkerStartDate" class="text-danger"></span>
                             </div>
@@ -210,7 +306,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Responsibilities" class="control-label"></label>
+                                <label asp-for="Responsibilities" class="control-label">Responsibilities <span class="text-danger">*</span></label>
                                 <input asp-for="Responsibilities" class="form-control" />
                                 <span asp-validation-for="Responsibilities" class="text-danger"></span>
                             </div>
@@ -311,14 +407,14 @@
                         <h4 class="mt-4">Skills</h4>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="SkillName" class="control-label"></label>
+                                <label asp-for="SkillName" class="control-label">Skill Name <span class="text-danger">*</span></label>
                                 <input asp-for="SkillName" class="form-control" />
                                 <span asp-validation-for="SkillName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="SkillType" class="control-label"></label>
+                                <label asp-for="SkillType" class="control-label">Skill Type <span class="text-danger">*</span></label>
                                 <input asp-for="SkillType" class="form-control" />
                                 <span asp-validation-for="SkillType" class="text-danger"></span>
                             </div>
@@ -329,15 +425,39 @@
                         <h4 class="mt-4">Languages</h4>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Language" class="control-label"></label>
-                                <input asp-for="Language" class="form-control" />
+                                <label asp-for="Language" class="control-label">Language <span class="text-danger">*</span></label>
+                                <select asp-for="Language" class="form-select">
+                                    <option value="">-- Select Language --</option>
+                                    <option value="English">English</option>
+                                    <option value="Afrikaans">Afrikaans</option>
+                                    <option value="Zulu">Zulu</option>
+                                    <option value="Xhosa">Xhosa</option>
+                                    <option value="Spanish">Spanish</option>
+                                    <option value="Mandarin">Mandarin</option>
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="French">French</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="Portuguese">Portuguese</option>
+                                    <option value="Russian">Russian</option>
+                                    <option value="German">German</option>
+                                    <option value="Japanese">Japanese</option>
+                                    <option value="Italian">Italian</option>
+                                    <option value="Korean">Korean</option>
+                                    <option value="Swahili">Swahili</option>
+                                </select>
                                 <span asp-validation-for="Language" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Proficiency" class="control-label"></label>
-                                <input asp-for="Proficiency" class="form-control" />
+                                <label asp-for="Proficiency" class="control-label">Proficiency <span class="text-danger">*</span></label>
+                                <select asp-for="Proficiency" class="form-select">
+                                    <option value="">-- Select Proficiency --</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Native Speaker">Native Speaker</option>
+                                </select>
                                 <span asp-validation-for="Proficiency" class="text-danger"></span>
                             </div>
                         </div>

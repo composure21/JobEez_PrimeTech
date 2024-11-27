@@ -149,7 +149,7 @@
                     <p class="custom-small-text">Create your CV. Take your career to the next level.</p>
                     <p class="custom-small-text">Find great talent. Build your business.</p>
                     <div class="button-container">
-                        <a asp-action="Privacy" class="btn btn-primary">Create CV</a>
+                        <a @* asp-action="Privacy" *@ asp-controller="BuildResumes" asp-action="Create" class="btn btn-primary">Create CV</a>
                     </div>
                 </div>
                 <div class="image-container">

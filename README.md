@@ -1,4 +1,5 @@
 JobEez
+-------------------------------------------------------------------------------------------------
 Our team is called PrimeTech and the project our group has chosen is called the Employment Portal, 
 this is a Non-Profit Organization.  
 This project aims to create an online and mobile platform for a NPO that will assist unemployed 

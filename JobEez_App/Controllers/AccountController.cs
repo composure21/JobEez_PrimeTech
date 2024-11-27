@@ -78,7 +78,7 @@ namespace JobEez_App.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Role = model.Role 
+                Role = model.Role
             };
 
             var result = await _signInManager.UserManager.CreateAsync(user, model.Password);
@@ -87,29 +87,38 @@ namespace JobEez_App.Controllers
                 // Assign role
                 await _signInManager.UserManager.AddToRoleAsync(user, model.Role);
 
-                // Set payment amount and description based on role
-                string amount = model.Role == "Employer" ? "50.00" : "5.00";
-                string itemName = model.Role == "Employer" ? "Employer Registration Fee" : "Employee Registration Fee";
+                // Only require payment for Employers
+                if (model.Role == "Employer")
+                {
+                    // Set payment amount and description for Employer
+                    string amount = "50.00";
+                    string itemName = "Employer Registration Fee";
 
-                // Redirect to PayFast for payment
-                var payFastUrl = "https://sandbox.payfast.co.za/eng/process"; // Sandbox URL
-                var queryParams = new Dictionary<string, string>
-        {
-            { "email_address", model.Email },
-            { "merchant_id", _configuration["PayFast:MerchantId"] },
-            { "merchant_key", _configuration["PayFast:MerchantKey"] },
-            { "amount", amount },
-            { "item_name", itemName },
-            { "return_url", Url.Action("Index", "BuildResumes", null, Request.Scheme) },
-            { "cancel_url", Url.Action("PaymentCancel", "Account", null, Request.Scheme) },
-            { "notify_url", Url.Action("PayFastReturn", "Account", null, Request.Scheme) }
-        };
+                    // Redirect to PayFast for payment
+                    var payFastUrl = "https://sandbox.payfast.co.za/eng/process"; // Sandbox URL
+                    var queryParams = new Dictionary<string, string>
+            {
+                { "email_address", model.Email },
+                { "merchant_id", _configuration["PayFast:MerchantId"] },
+                { "merchant_key", _configuration["PayFast:MerchantKey"] },
+                { "amount", amount },
+                { "item_name", itemName },
+                { "return_url", Url.Action("Index", "BuildResumes", null, Request.Scheme) },
+                { "cancel_url", Url.Action("PaymentCancel", "Account", null, Request.Scheme) },
+                { "notify_url", Url.Action("PayFastReturn", "Account", null, Request.Scheme) }
+            };
 
-                var queryString = string.Join("&", queryParams.Select(kv => $"{kv.Key}={Uri.EscapeDataString(kv.Value)}"));
-                return Redirect($"{payFastUrl}?{queryString}");
+                    var queryString = string.Join("&", queryParams.Select(kv => $"{kv.Key}={Uri.EscapeDataString(kv.Value)}"));
+                    return Redirect($"{payFastUrl}?{queryString}");
+                }
+                else
+                {
+                    // No payment needed for Employees, just redirect to BuildResumes
+                    return RedirectToAction("Index", "BuildResumes");
+                }
             }
 
-            // Handle errors
+            // Handle errors if account creation failed
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
@@ -117,6 +126,7 @@ namespace JobEez_App.Controllers
 
             return View(model);
         }
+
 
         //Code Attribution:https://developers.payfast.co.za/docs
 

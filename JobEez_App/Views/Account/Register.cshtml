@@ -85,7 +85,7 @@
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" asp-for="Agreement" id="agreementCheckbox" />
                 <label class="form-check-label" for="agreementCheckbox">
-                    I have read the <a href="~/Views/Home/Privacy.cshtml" target="_blank" class="text-decoration-none">Privacy Policy</a> and agree to the terms of use.
+                    I have read the <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> and agree to the terms of use.
                 </label>
                 <span asp-validation-for="Agreement" class="text-danger d-block"></span>
             </div>

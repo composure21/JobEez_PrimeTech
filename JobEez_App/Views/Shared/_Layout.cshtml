@@ -28,9 +28,12 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User)) // Check if the user is logged in
                         {
+                            if (User.IsInRole("Employee"))
+                            {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="BuildResumes" asp-action="Create">Create Resume</a>
                             </li>
+                            }
                         }
                         @if (SignInManager.IsSignedIn(User))
                         {
